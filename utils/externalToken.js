@@ -14,6 +14,7 @@ async function verifyGoogleToken( token ) {
   return {
     name: payload.given_name,
     email: payload.email,
+    img: payload.picture,
     socialNetwork: true
   }
 }

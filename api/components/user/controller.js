@@ -9,8 +9,9 @@ const getUser = (email) => {
 }
 
 const login = async (email, password) => {
+  console.log(email, password)
   const user = await store.getUser(email)
-    .catch(e => {throw Error('Email o contraseña incorrecto.')})
+  if(!user) throw Error('Email o contraseña incorrecto.')
 
   const correctPassword = await bcrypt.compare(password, user.password)
   if(!correctPassword) throw Error('Email o contraseña incorrecto.')
@@ -37,7 +38,7 @@ const signup = async (name, email, password) => {
 const verifyGoogle = async (googleToken) => {
   const googleUser = await verifyGoogleToken(googleToken)
     .catch(e => {throw Error('Token de Google inválido')})
-  
+    
   const userDB = await store.getUser(googleUser.email)
   if (!userDB) {
       googleUser.password = 'notAPassword'
@@ -63,6 +64,7 @@ const verifyFacebook = async (userData) => {
         name: name[0],
         email: userData.email,
         password: 'notAPassword',
+        img: userData.picture.data.url,
         socialNetwork: true
       }
       const user = await store.addUser(newUser)

@@ -4,6 +4,10 @@ const getProducts = () => {
   return Model.find(/* {stock: { $gt: 0 }} */)
 }
 
+const getLatestProducts = () => {
+  return Model.find().sort({ _id: -1 }).limit(12)
+}
+
 const getById = (id) => {
   return Model.findById(id)
 }
@@ -23,6 +27,7 @@ const removeProduct = (id) => {
 
 module.exports = {
   getProducts,
+  getLatestProducts,
   getById,
   addProduct,
   updateProduct,

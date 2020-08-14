@@ -1,6 +1,7 @@
 const store = require('./store')
 
-const getProducts = () => {
+const getProducts = (query) => {
+  if (query === 'latest') return store.getLatestProducts()
   return store.getProducts()
 }
 

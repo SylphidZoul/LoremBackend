@@ -27,6 +27,9 @@ const userSchema = new Schema({
     default: 'USER_ROLE',
     enum: ValidRoles
   },
+  img: {
+    type: String
+  },
   socialNetwork: {
     type: Boolean,
     default: false

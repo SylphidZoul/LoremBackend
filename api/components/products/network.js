@@ -4,8 +4,8 @@ const controller = require('./controller')
 const {verifyToken, verifyAdmin} = require('../../../middlewares/auth')
 const response = require('../../../utils/response')
 
-router.get('/', (req, res) => {
-  controller.getProducts()
+router.get('/:query', (req, res) => {
+  controller.getProducts(req.params.query)
     .then((lista) => 
       response.success(req, res, lista, 200)
     )
