@@ -3,9 +3,9 @@ const router = express.Router()
 const controller = require('./controller')
 const {verifyToken} = require('../../../middlewares/auth')
 const response = require('../../../utils/response')
+const querystring = require('querystring');
 
 router.post('/', verifyToken, (req, res) => {
-  console.log('a ver si sale')
   controller.generateCheckoutUrl(req.body, req.decoded)
     .then(resp => {
       response.success(req, res, resp.data, 200)
@@ -16,7 +16,9 @@ router.post('/', verifyToken, (req, res) => {
     })
 })
 
-router.post('/webhook', (req, res) => {
+router.post('/webhook/:data', (req, res) => {
+  let search = querystring.parse(req.params.data)
+  console.log(search)
   controller.test(req.body)
 
   response.success(req, res, 'ok', 200)

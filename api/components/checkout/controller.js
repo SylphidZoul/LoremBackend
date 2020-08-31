@@ -33,7 +33,7 @@ const generateCheckoutUrl = (body, user) => {
       pending: "https://lorem-ecommerce-sylphid.vercel.app",
       failure: "https://lorem-ecommerce-sylphid.vercel.app"
     }, 
-    notification_url: "https://lorem-backend.herokuapp.com/webhook/", 
+    notification_url: "https://lorem-backend.herokuapp.com/checkout/webhook/", 
     auto_return: "approved"  
   }
   
