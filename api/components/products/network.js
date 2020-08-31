@@ -1,21 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const querystring = require('querystring');
 const controller = require('./controller')
 const {verifyToken, verifyAdmin} = require('../../../middlewares/auth')
 const response = require('../../../utils/response')
 
-router.get('/:query', (req, res) => {
-  controller.getProducts(req.params.query)
-    .then((lista) => 
-      response.success(req, res, lista, 200)
-    )
-    .catch((err) => {
-      response.error(req, res, 'Internal Error', 500, err.message)
-    })
-})
-
-router.get('/:id', (req, res) => {
-  controller.getById(req.params.id)
+router.get('/:search', (req, res) => {
+  let search = querystring.parse(req.params.search)
+  controller.getBySearch(search)
     .then((user) => {
       response.success(req, res, user, 200)
     })

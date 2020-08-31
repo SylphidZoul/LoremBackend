@@ -17,5 +17,8 @@ module.exports = {
   facebook: {
     clientId: process.env.FACEBOOK_ID || '1698932393605899',
     secret: process.env.FACEBOOK_SECRET || '72c997923a9cccc5c170609d6ef7715d'
+  },
+  mercadopago: {
+    access_token: process.env.MPAGO_TOKEN || 'APP_USR-6222301453142323-083023-75d1d80e709b778f2c94c3f2a3d244b2-635446021'
   }
 }

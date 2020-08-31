@@ -1,12 +1,55 @@
 const store = require('./store')
 
-const getProducts = (query) => {
-  if (query === 'latest') return store.getLatestProducts()
-  return store.getProducts()
-}
+const getBySearch = (search) => {
+  if (search.id) return store.getById(search.id)
+  if (search.query === 'feed') return store.getLatestProducts()
 
-const getById = (id) => {
-  return store.getById(id)
+  let query = {}
+  let fieldSearch = {$regex: search.query, $options: 'i'}
+
+  switch (search.field) {
+    case 'name':
+      query.field = { name: fieldSearch}
+      break;
+    case 'artist':
+      query.field = { artist: fieldSearch}
+      break
+    case 'genre':
+      query.field = { genre: fieldSearch}
+      break
+    case 'tracks':
+      query.field = { tracks: fieldSearch}
+      break
+    default:
+      query.field = {$or: [
+        {name: fieldSearch},
+        {artist: fieldSearch},
+        {genre: fieldSearch},
+        {tracks: fieldSearch},
+        {description: fieldSearch}
+      ]}
+      break;
+  }
+
+  switch (search.sort) {
+    case 'price':
+      query.sort = { unitPrice: 1 }
+      break;
+    case 'artist':
+      query.sort = { artist: 1 }
+      break;
+    case 'release':
+      query.sort = { release: -1}
+      break
+    case 'sales':
+      query.sort = { sales: -1}
+      break
+    default:
+      query.sort = { _id: -1 }
+      break;
+  }
+  
+  return store.getProducts(query)
 }
 
 const addProduct = async (body) => {
@@ -33,8 +76,7 @@ const removeProduct = (id) => {
 }
 
 module.exports = {
-  getProducts,
-  getById,
+  getBySearch,
   addProduct,
   updateProduct,
   removeProduct

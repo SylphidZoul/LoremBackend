@@ -1,7 +1,11 @@
 const Model = require('./model')
 
-const getProducts = () => {
-  return Model.find(/* {stock: { $gt: 0 }} */)
+/* const getAllProducts = () => {
+  return Model.find()
+} */
+
+const getProducts = (query) => {
+  return Model.find(query.field).sort(query.sort)
 }
 
 const getLatestProducts = () => {
