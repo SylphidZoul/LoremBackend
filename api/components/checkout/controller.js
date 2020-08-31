@@ -51,10 +51,12 @@ const generateCheckoutUrl = (body, user) => {
 const handleNotifications = (req) => {
   if (req.body.topic === 'payment'){
     const collection_id = req.body.resource
-
     axios.get(`https://api.mercadopago.com/v1/payments/${collection_id}?access_token=${config.mercadopago.access_token}`)
       .then((resp) => {
         console.log(resp)
+      })
+      .catch((e) => {
+        console.log(e)
       })
   }
 }
