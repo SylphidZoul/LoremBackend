@@ -4,6 +4,7 @@ class PaymentController {
       let body = ""; 
       req.on("data", chunk => {  
         body += chunk;
+        console.log('entro aca')
       });
       req.on("end", () => {
         const data = JSON.parse(body)
