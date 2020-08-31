@@ -19,9 +19,17 @@ router.post('/', verifyToken, (req, res) => {
 router.post('/webhook/:data', (req, res) => {
   let search = querystring.parse(req.params.data)
   console.log(search)
-  controller.test(req.body)
-
-  response.success(req, res, 'ok', 200)
+  if (req.method === "POST") { 
+    let body = ""; 
+    req.on("data", chunk => {  
+      body += chunk.toString();
+    });
+    req.on("end", () => {  
+      console.log(body, "webhook response"); 
+      res.end("ok");
+    });
+  }
+  res.status(200); 
 })
 router.get('/webhook', (req, res) => {
   response.success(req, res, 'ok', 200)
