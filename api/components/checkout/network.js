@@ -19,10 +19,10 @@ router.post('/', verifyToken, (req, res) => {
 router.post('/webhook', (req, res) => {
   console.log('a ver si entra')
   if (req.method === "POST") { 
-    console.log('entro')
     let body = ""; 
     req.on("data", chunk => {  
       body += chunk.toString();
+      console.log(body)
     });
     req.on("end", () => {  
       console.log(body, "webhook response"); 
