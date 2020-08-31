@@ -19,6 +19,6 @@ app.use('/products', products)
 app.use('/keys', keys)
 app.use('/checkout', checkout)
 
-app.listen(config.port, () => {
+app.listen(config.api.port, () => {
   console.log(`Listening to port ${config.api.port}`)
 })
