@@ -3,9 +3,6 @@ const router = express.Router()
 const controller = require('./controller')
 const {verifyToken} = require('../../../middlewares/auth')
 const response = require('../../../utils/response')
-const PaymentController = require('./webhook')
-
-const PaymentInstance = new PaymentController()
 
 router.post('/', verifyToken, (req, res) => {
   controller.generateCheckoutUrl(req.body, req.decoded)
@@ -19,7 +16,8 @@ router.post('/', verifyToken, (req, res) => {
 })
 
 router.post('/webhook', (req, res) => {
-  console.log(req, 'this is one')
+  /* console.log(req.body, 'this is one') */
+  controller.handleNotifications(req)
   /* PaymentInstance.webhook(req, res) */
   res.status(200).send('ok')
 })
