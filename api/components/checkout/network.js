@@ -20,11 +20,8 @@ router.post('/', verifyToken, (req, res) => {
 
 router.post('/webhook', (req, res) => {
   console.log(req.body)
-  PaymentInstance.webhook(req, res)
-})
-
-router.get('/webhook', (req, res) => {
-  response.success(req, res, 'ok', 200)
+  /* PaymentInstance.webhook(req, res) */
+  res.status(200).send('ok')
 })
 
 module.exports = router
