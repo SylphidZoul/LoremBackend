@@ -1,6 +1,6 @@
 module.exports = {
   api: {
-    port: process.env.API_PORT || 3004,
+    port: process.env.PORT || 3004,
     dbUrl: process.env.DB_URL || 'mongodb+srv://db_user_sylphid:Olazabal3805@cluster0.gzgpp.mongodb.net/LoremDB?retryWrites=true&w=majority'
   },
   jwt: {
