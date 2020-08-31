@@ -3,10 +3,11 @@ class PaymentController {
     if (req.method === "POST") { 
       let body = ""; 
       req.on("data", chunk => {  
-        body += chunk.toString();
+        body += chunk;
       });
-      req.on("end", () => {  
-        console.log(body, "webhook response"); 
+      req.on("end", () => {
+        const data = JSON.parse(body)
+        console.log(data, "webhook response"); 
         res.end("ok");
       });
     }
