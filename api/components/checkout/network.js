@@ -16,10 +16,12 @@ router.post('/', verifyToken, (req, res) => {
     })
 })
 
-router.post('/webhook', (req, res) => { 
+router.post('/webhook', (req, res) => {
+    console.log('entro')
     let body = ""; 
-    req.on("data", chunk => {  
+    req.on("data", chunk => { 
       body += chunk.toString();
+      console.log(body)
     });
     req.on("end", () => {  
       console.log(body, "webhook response"); 
