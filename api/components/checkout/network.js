@@ -19,7 +19,7 @@ router.post('/', verifyToken, (req, res) => {
 })
 
 router.post('/webhook', (req, res) => {
-  console.log(req.body)
+  console.log(req.body, 'this is one')
   PaymentInstance.webhook(req, res)
   res.status(200).send('ok')
 })

@@ -1,6 +1,7 @@
 class PaymentController {
   webhook(req, res) { 
-    if (req.method === "POST") { 
+    if (req.method === "POST") {
+      console.log('entro en el if')
       let body = ""; 
       req.on("data", chunk => {  
         body += chunk;
