@@ -16,10 +16,10 @@ router.post('/', verifyToken, (req, res) => {
     })
 })
 
-router.post('/webhook/:data', (req, res) => {
-  let search = querystring.parse(req.params.data)
-  console.log(search)
+router.post('/webhook', (req, res) => {
+  console.log('a ver si entra')
   if (req.method === "POST") { 
+    console.log('entro')
     let body = ""; 
     req.on("data", chunk => {  
       body += chunk.toString();
