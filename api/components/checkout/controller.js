@@ -15,7 +15,6 @@ const generateCheckoutUrl = async (body, user) => {
     }),
   }
   const paymentCreated = await store.addPayment(paymentDB)
-  console.log(paymentCreated)
 
   const products = body.map((product) => {
     return {
@@ -69,7 +68,9 @@ const handleNotifications = async (req) => {
       const { items, ...payment } = resp.data
       const updatedPayment = {
         order_status: payment.order_status,
-        payment_status: payment.payments[payment.payments.length - 1].status || 'pending',
+        payment_status: payment.payments
+          ? payment.payments[payment.payments.length - 1].status
+          : 'pending',
         total: payment.total_amount,
         transaction: payment
       }
