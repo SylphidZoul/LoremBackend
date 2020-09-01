@@ -64,7 +64,7 @@ const handleNotifications = (req) => {
     const url = req.body.resource
     axios.get(`${url}?access_token=${config.mercadopago.access_token}`)
       .then((resp) => {
-        console.log(resp)
+        console.log(resp.data)
       })
       .catch((e) => {
         console.log(e)
