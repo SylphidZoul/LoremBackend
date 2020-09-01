@@ -68,7 +68,7 @@ const handleNotifications = async (req) => {
       const { items, ...payment } = resp.data
       const updatedPayment = {
         order_status: payment.order_status,
-        payment_status: payment.payments
+        payment_status: payment.payments.length > 0
           ? payment.payments[payment.payments.length - 1].status
           : 'pending',
         total: payment.total_amount,
