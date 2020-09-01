@@ -60,16 +60,25 @@ const generateCheckoutUrl = async (body, user) => {
 
 }
 
-const handleNotifications = (req) => {
+const handleNotifications = async (req) => {
   if (req.body.topic === 'merchant_order'){
     const url = req.body.resource
-    axios.get(`${url}?access_token=${config.mercadopago.access_token}`)
-      .then((resp) => {
-        console.log(resp.data)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+
+    try {
+      const resp = await axios.get(`${url}?access_token=${config.mercadopago.access_token}`) 
+      const { items, ...payment } = resp.data
+      const updatedPayment = {
+        order_status: payment.order_status,
+        payment_status: payment.payments[payment.payments.length - 1].status || 'pending',
+        total: payment.total_amount,
+        transaction: payment
+      }
+      const Saved = await store.updatePayment(payment.external_reference, updatedPayment)
+      console.log(Saved)
+
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
