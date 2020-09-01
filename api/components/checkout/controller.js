@@ -1,8 +1,21 @@
 const axios = require('axios')
 const config = require('../../../config')
+const store = require('./store')
 
-const generateCheckoutUrl = (body, user) => {
-  const mercadoPagoUrl = `https://api.mercadopago.com/checkout/preferences?access_token=${config.mercadopago.access_token}`
+const generateCheckoutUrl = async (body, user) => {
+  const paymentDB = {
+    user: user._id,
+    items: body.map((product) => {
+      return {
+        product: {
+          _id: product._id
+        },
+        quantity: product.quantity
+      }
+    }),
+  }
+  const paymentCreated = await store.addPayment(paymentDB)
+  console.log(paymentCreated)
 
   const products = body.map((product) => {
     return {
@@ -18,7 +31,7 @@ const generateCheckoutUrl = (body, user) => {
   
   let preference = {
     items: products,
-    external_reference: "Lorem eCommerce", 
+    external_reference: paymentCreated._id, 
     payer: { 
       name: 'TEST8TGDSKLK',
       email: 'test_user_70837165@testuser.com', 
@@ -32,14 +45,13 @@ const generateCheckoutUrl = (body, user) => {
       success: "https://lorem-ecommerce-sylphid.vercel.app", 
       pending: "https://lorem-ecommerce-sylphid.vercel.app",
       failure: "https://lorem-ecommerce-sylphid.vercel.app"
-    }, 
+    },
+    marketplace: 'Lorem eCommerce',
     notification_url: "https://lorem-backend.herokuapp.com/checkout/webhook/", 
     auto_return: "approved"  
   }
   
-  /* mercadopago.configure({access_token: config.mercadopago.access_token})
-  return mercadopago.preferences.create(preference) */
-
+  const mercadoPagoUrl = `https://api.mercadopago.com/checkout/preferences?access_token=${config.mercadopago.access_token}`
   return axios.post(mercadoPagoUrl, preference, { 
     headers: { 
       "Content-Type": "application/json"
@@ -49,17 +61,6 @@ const generateCheckoutUrl = (body, user) => {
 }
 
 const handleNotifications = (req) => {
-  console.log(req.body)
-  /* if (req.body.topic === 'payment'){
-    const collection_id = req.body.resource
-    axios.get(`${collection_id}?access_token=${config.mercadopago.access_token}`)
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  } */
   if (req.body.topic === 'merchant_order'){
     const url = req.body.resource
     axios.get(`${url}?access_token=${config.mercadopago.access_token}`)

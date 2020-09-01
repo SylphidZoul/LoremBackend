@@ -5,7 +5,7 @@ const {verifyToken} = require('../../../middlewares/auth')
 const response = require('../../../utils/response')
 
 router.post('/', verifyToken, (req, res) => {
-  controller.generateCheckoutUrl(req.body, req.decoded)
+  controller.generateCheckoutUrl(req.body, req.decoded.user)
     .then(resp => {
       response.success(req, res, resp.data, 200)
     })
@@ -16,9 +16,8 @@ router.post('/', verifyToken, (req, res) => {
 })
 
 router.post('/webhook', (req, res) => {
-  /* console.log(req.body, 'this is one') */
   controller.handleNotifications(req)
-  /* PaymentInstance.webhook(req, res) */
+
   res.status(200).send('ok')
 })
 

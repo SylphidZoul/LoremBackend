@@ -1,9 +1,5 @@
 const Model = require('./model')
 
-/* const getAllProducts = () => {
-  return Model.find()
-} */
-
 const getProducts = (query) => {
   return Model.find(query.field).sort(query.sort)
 }
