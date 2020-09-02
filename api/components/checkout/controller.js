@@ -21,7 +21,12 @@ const generateCheckoutUrl = async (body, user) => {
   const paymentCreated = await store.addPayment(paymentDB)
 
   const products = body.map((product) => {
-    return {getPaymentByIdtity, 
+    return {
+      id: product._id, 
+      title: product.name, 
+      description: product.artist, 
+      picture_url: product.img,  
+      quantity: product.quantity, 
       currency_id: "ARS",
       unit_price: parseFloat(product.unitPrice) 
     }
