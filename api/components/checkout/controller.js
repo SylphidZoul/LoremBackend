@@ -41,9 +41,9 @@ const generateCheckoutUrl = async (body, user) => {
       default_installments: 1
     }, 
     back_urls: {
-      success: "https://lorem-ecommerce-sylphid.vercel.app", 
-      pending: "https://lorem-ecommerce-sylphid.vercel.app",
-      failure: "https://lorem-ecommerce-sylphid.vercel.app"
+      success: "https://lorem-ecommerce-sylphid.vercel.app/paymentstatus", 
+      pending: "https://lorem-ecommerce-sylphid.vercel.app/paymentstatus",
+      failure: "https://lorem-ecommerce-sylphid.vercel.app/paymentstatus"
     },
     marketplace: 'Lorem eCommerce',
     notification_url: "https://lorem-backend.herokuapp.com/checkout/webhook/", 
@@ -66,6 +66,7 @@ const handleNotifications = async (req) => {
     try {
       const resp = await axios.get(`${url}?access_token=${config.mercadopago.access_token}`) 
       const { items, ...payment } = resp.data
+
       const updatedPayment = {
         order_status: payment.order_status,
         payment_status: payment.payments.length > 0
@@ -74,6 +75,7 @@ const handleNotifications = async (req) => {
         total: payment.total_amount,
         transaction: payment
       }
+
       const Saved = await store.updatePayment(payment.external_reference, updatedPayment)
       console.log(Saved)
 
