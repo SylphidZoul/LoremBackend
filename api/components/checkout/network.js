@@ -6,8 +6,8 @@ const response = require('../../../utils/response')
 
 router.get('/:id', (req, res) => {
   controller.getPaymentById(req.params.id)
-    .then(resp => {
-      response.success(req, res, resp.data, 200)
+    .then(payment => {
+      response.success(req, res, payment, 200)
     })
     .catch(error => {
       console.log(error)
