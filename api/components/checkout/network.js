@@ -5,13 +5,13 @@ const {verifyToken} = require('../../../middlewares/auth')
 const response = require('../../../utils/response')
 
 router.get('/:id', (req, res) => {
-  controller.getPaymentById(req.body, req.params.id)
+  controller.getPaymentById(req.params.id)
     .then(resp => {
       response.success(req, res, resp.data, 200)
     })
     .catch(error => {
       console.log(error)
-      response.error(req, res, 'error', 400, error)
+      response.error(req, res, 'No se pudo encontrar el pago', 400, error)
     })
 })
 
