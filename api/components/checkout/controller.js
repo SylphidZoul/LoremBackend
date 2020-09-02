@@ -2,6 +2,10 @@ const axios = require('axios')
 const config = require('../../../config')
 const store = require('./store')
 
+const getPaymentById = (id) => {
+  return store.getPaymentById(id)
+}
+
 const generateCheckoutUrl = async (body, user) => {
   const paymentDB = {
     user: user._id,
@@ -17,12 +21,7 @@ const generateCheckoutUrl = async (body, user) => {
   const paymentCreated = await store.addPayment(paymentDB)
 
   const products = body.map((product) => {
-    return {
-      id: product._id, 
-      title: product.name, 
-      description: product.artist, 
-      picture_url: product.img,  
-      quantity: product.quantity, 
+    return {getPaymentByIdtity, 
       currency_id: "ARS",
       unit_price: parseFloat(product.unitPrice) 
     }
@@ -86,6 +85,7 @@ const handleNotifications = async (req) => {
 }
 
 module.exports = {
+  getPaymentById,
   generateCheckoutUrl,
   handleNotifications
 }
