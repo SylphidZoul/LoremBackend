@@ -8,7 +8,7 @@ const cors = require('cors')
 const DB = require('../db')
 const app = express()
 
-app.use(cors())
+app.use(cors(config.cors))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ strict: false,  }))
 

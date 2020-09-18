@@ -1,7 +1,7 @@
 const Model = require('./model')
 
 const getProducts = (query) => {
-  return Model.find(query.field).sort(query.sort)
+  return Model.find(query.field).sort(query.sort).limit(15).skip(15*query.pageNumber)
 }
 
 const getLatestProducts = () => {

@@ -28,7 +28,6 @@ router.post('/', verifyToken, (req, res) => {
 
 router.post('/webhook', (req, res) => {
   controller.handleNotifications(req)
-
   res.status(200).send('ok')
 })
 

@@ -9,7 +9,6 @@ const getUser = (email) => {
 }
 
 const login = async (email, password) => {
-  console.log(email, password)
   const user = await store.getUser(email)
   if(!user) throw Error('Email o contraseña incorrecto.')
 

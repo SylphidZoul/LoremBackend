@@ -1,24 +1,24 @@
 module.exports = {
   api: {
     port: process.env.PORT || 3004,
-    dbUrl: process.env.DB_URL || 'mongodb+srv://db_user_sylphid:Olazabal3805@cluster0.gzgpp.mongodb.net/LoremDB?retryWrites=true&w=majority'
+    dbUrl: process.env.DB_URL 
   },
   jwt: {
-    secret: process.env.JWT_SECRET || 'secret'
+    secret: process.env.JWT_SECRET 
   },
   cors: {
     origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
     optionsSuccessStatus: 200
   },
   google: {
-    clientId: process.env.GOOGLE_ID || '252898407705-nf1nqeck3dnbjrl7d7nf1evvhvmeubr8.apps.googleusercontent.com',
-    secret: process.env.GOOGLE_SECRET || 'tqKWwSeb6DAlIfR5VuLYBuM6'
+    clientId: process.env.GOOGLE_ID,
+    secret: process.env.GOOGLE_SECRET 
   },
   facebook: {
-    clientId: process.env.FACEBOOK_ID || '1698932393605899',
-    secret: process.env.FACEBOOK_SECRET || '72c997923a9cccc5c170609d6ef7715d'
+    clientId: process.env.FACEBOOK_ID,
+    secret: process.env.FACEBOOK_SECRET
   },
   mercadopago: {
-    access_token: process.env.MPAGO_TOKEN || 'APP_USR-6222301453142323-083023-75d1d80e709b778f2c94c3f2a3d244b2-635446021'
+    access_token: process.env.MPAGO_TOKEN
   }
 }

@@ -8,8 +8,8 @@ const response = require('../../../utils/response')
 router.get('/:search', (req, res) => {
   let search = querystring.parse(req.params.search)
   controller.getBySearch(search)
-    .then((user) => {
-      response.success(req, res, user, 200)
+    .then((product) => {
+      response.success(req, res, product, 200)
     })
     .catch((err) => {
       response.error(req, res, 'No se pudo encontrar el producto', 404, err.message)

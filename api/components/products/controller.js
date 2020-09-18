@@ -5,6 +5,7 @@ const getBySearch = (search) => {
   if (search.query === 'feed') return store.getLatestProducts()
 
   let query = {}
+  query.pageNumber = search.pageNumber - 1
   let fieldSearch = {$regex: search.query, $options: 'i'}
 
   switch (search.field) {
