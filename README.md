@@ -4,6 +4,10 @@
 
 [https://lorem-backend.herokuapp.com/](https://lorem-backend.herokuapp.com/)
 
+# Frontend Client
+
+[Lorem eCommerce](https://github.com/SylphidZoul/LoremEcommerce)
+
 # Tools
 
 * [expressjs](https://expressjs.com/)
@@ -14,4 +18,4 @@
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
 * [mongoose](https://www.npmjs.com/package/mongoose) - for MongoDB
 * [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator)
-* MercadoPago was integred without SDK.
+* MercadoPago was integrated without SDK.
