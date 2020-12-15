@@ -1,14 +1,14 @@
-## Backend of Lorem eCommerce
+# Backend of Lorem eCommerce
 
-# Hosted on Heroku
+## Hosted on Heroku
 
 [https://lorem-backend.herokuapp.com/](https://lorem-backend.herokuapp.com/)
 
-# Frontend Client
+## Frontend Client
 
 [Lorem eCommerce](https://github.com/SylphidZoul/LoremEcommerce)
 
-# Tools
+## Tools
 
 * [expressjs](https://expressjs.com/)
 * [cors](https://www.npmjs.com/package/cors)
